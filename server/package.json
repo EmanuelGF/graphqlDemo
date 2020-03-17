@@ -4,7 +4,7 @@
   "description": "demo server",
   "main": "\u001b[C\u001b[C\u001bserver.js\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D(\u001b[Bserver.js)",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "npx nodemon server.js"
   },
   "author": "EmanuelGF",
   "license": "ISC",

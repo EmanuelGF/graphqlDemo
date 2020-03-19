@@ -10,8 +10,10 @@ const {
         GraphQLList
     } = graphql;
 
-//test data 
-const books = [
+//test data *********************************************************************************
+const uniqid =require('uniqid') //Create unique ids for user. (not to be used in production)
+
+let books = [
     {name: 'Singularidade', genre: 'scfy', id: '1', authorId: '1'},
     {name: 'Player', genre: 'Romance', id: '2', authorId: '2'},
     {name: 'Ready player one', genre: 'scfy', id: '3', authorId: '3'},
@@ -20,11 +22,13 @@ const books = [
     {name: 'zero sum game', genre: 'scfy', id: '6', authorId: '2'}
 ];
 
-const authors = [
+let authors = [
     {name: 'EmanuelGF', age: '36', id: '1'},
     {name: 'author 2', age: '40', id: '2'},
     {name: 'aurhor 3', age: '40', id: '3'}
 ];
+
+//********************************************************************************************
 
 const BookType = new GraphQLObjectType({
     name: 'Book',
@@ -95,6 +99,33 @@ const RootQuery = new GraphQLObjectType({
     }
 });
 
+const Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        
+        addAuthor: {
+            type: AuthorType,
+            args: {
+                name: {type: GraphQLString},
+                age: { type: GraphQLInt}
+            },
+            resolve(parent, args) {
+                let author = {
+                    id: uniqid(),
+                    name: args.name,
+                    age: args.age,
+                }
+                authors.push(author);
+                return author;
+            }
+        }
+
+
+    }
+})
+
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: Mutation
 });

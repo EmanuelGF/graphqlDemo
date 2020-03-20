@@ -1,4 +1,6 @@
 const graphql = require('graphql');
+
+/**Lodash has helper methods to query the arrays with tha dummy data */
 const _ = require('lodash');
 
 const {
@@ -10,8 +12,11 @@ const {
         GraphQLList
     } = graphql;
 
-//test data *********************************************************************************
-const uniqid =require('uniqid') //Create unique ids for user. (not to be used in production)
+//test data - this is done this way only for example purposes. In a real application the data should be persisted in 
+// real database system like mySql or mongoDb. Also please keep in mind that everytime the node server is restarted the
+// data you saved before is no longer present, only the hardcoded data remains.
+
+const uniqid =require('uniqid') //Create unique ids for user. 
 
 let books = [
     {name: 'Singularidade', genre: 'scfy', id: '1', authorId: '1'},
@@ -27,12 +32,13 @@ let authors = [
     {name: 'author 2', age: '40', id: '2'},
     {name: 'aurhor 3', age: '40', id: '3'}
 ];
+/******************************************************************************************************* */
 
-//********************************************************************************************
+//*******************************Defining the graphql object types*************************************************************
 
 const BookType = new GraphQLObjectType({
     name: 'Book',
-    fields: () => ({ //Is in a function because it will only be executed later on after the whole file is run
+    fields: () => ({ //Is in a function because it will only be executed later on, after the whole file is run.
         id: {type: GraphQLID},
         name: {type: GraphQLString},
         genre:  {type: GraphQLString},
@@ -60,49 +66,65 @@ const AuthorType = new GraphQLObjectType({
     })
 });
 
+//*****************************Defining the basic queries************************************************* */
+
+
+
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
+
+        //**Get a book based on the suplied id */
         book: {
             type: BookType,
             args: {id: {type: GraphQLID}},
             resolve(parent, args) {
-                //codigo para ir buscar codigo à base de dados.
+                //Code to fetch data from the database.
                 return _.find(books, {id: args.id});
             }
         },
 
+        //**Get all the books stored in the database */
         books: {
             type: new GraphQLList(BookType),
             resolve(parent, args) {
-                //codigo para ir buscar codigo à base de dados.
+                //Code to fetch data from the database.
                 return books
             }
         },
 
+
+        //***Get an author based on the suplied id */
         author: {
             type: AuthorType,
             args: {id: {type: GraphQLID}},
             resolve(parent, args) {
-                //codigo para ir buscar codigo à base de dados.
+                //Code to fetch data from the database.
                 return _.find(authors, {id: args.id});
             }
         },
 
+
+        //**Get all the authors stored in the database */
         authors: {
             type: new GraphQLList(AuthorType),
             resolve(parent, args) {
-                //codigo para ir buscar codigo à base de dados.
+                //Code to fetch data from the database.
                 return authors
             }
         },
     }
 });
 
+
+//**********************Mutations************************ */
+
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
         
+
+        //**Add an author to the database */
         addAuthor: {
             type: AuthorType,
             args: {
@@ -120,6 +142,7 @@ const Mutation = new GraphQLObjectType({
             }
         },
 
+        //**Add a book to the database */
         addBook: {
             type: BookType,
             args: {
@@ -143,7 +166,7 @@ const Mutation = new GraphQLObjectType({
     }
 })
 
-
+//**Export queries to be used in the server file */
 module.exports = new GraphQLSchema({
     query: RootQuery,
     mutation: Mutation

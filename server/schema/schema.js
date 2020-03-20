@@ -23,7 +23,7 @@ let books = [
 ];
 
 let authors = [
-    {name: 'EmanuelGF', age: '36', id: '1'},
+    {name: 'some author', age: '36', id: '1'},
     {name: 'author 2', age: '40', id: '2'},
     {name: 'aurhor 3', age: '40', id: '3'}
 ];
@@ -117,6 +117,25 @@ const Mutation = new GraphQLObjectType({
                 }
                 authors.push(author);
                 return author;
+            }
+        },
+
+        addBook: {
+            type: BookType,
+            args: {
+                name: {type: GraphQLString},
+                genre: { type: GraphQLString},
+                authorId: {type: GraphQLString}
+            },
+            resolve(parent, args) {
+                let book = {
+                    id: uniqid(),
+                    name: args.name,
+                    genre: args.genre,
+                    authorId: args.authorId
+                }
+                books.push(book);
+                return book;
             }
         }
 

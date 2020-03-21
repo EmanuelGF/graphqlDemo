@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 
+//Allow cross origin requests
+const cors = require('cors')
+app.use(cors())
+
 /**Require the Graphql schema file  */
 const schema = require('./schema/schema')
 

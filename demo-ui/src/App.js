@@ -14,7 +14,7 @@ const client = new AppolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client}>  
       <div id="main">
         <h2>Graphql demo ✔</h2>
         <BookList />

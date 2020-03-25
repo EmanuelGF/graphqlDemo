@@ -3,7 +3,8 @@ import AppolloClient from 'apollo-boost'
 import {ApolloProvider} from '@apollo/react-hooks'
 
 //components
-import BookList from './components/BookList'
+import BookList from './components/BookList/BookList'
+import AddBooks from './components/AddBook/AddBook'
 
 //Appollo client setup
 const client = new AppolloClient({
@@ -18,6 +19,8 @@ function App() {
       <div id="main">
         <h2>Graphql demo ✔</h2>
         <BookList />
+        <AddBooks />
+
       </div>
     </ApolloProvider>
     

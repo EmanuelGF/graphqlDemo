@@ -22,7 +22,7 @@ export default function BookList(props) {
                         <li><small>Age: {book.author.age}</small></li>
                         <li><small>Other books by {book.author.name}:</small></li>
                         {book.author.books.map(book =>(
-                            <ul>
+                            <ul key={book.id}>
                                 <li><small>{book.name}</small></li>
                             </ul>
                         ))}

@@ -41,7 +41,7 @@ let authors = [
 const BookType = new GraphQLObjectType({
     name: 'Book',
     fields: () => ({ //Is in a function because it will only be executed later on, after the whole file is run.
-        id: {type: GraphQLID},
+        id: {type: GraphQLString}, // GraphQLID should be used for the id.
         name: {type: GraphQLString},
         genre:  {type: GraphQLString},
         author: {
@@ -56,7 +56,7 @@ const BookType = new GraphQLObjectType({
 const AuthorType = new GraphQLObjectType({
     name: 'Author',
     fields: () => ({
-        id: {type: GraphQLID},
+        id: {type: GraphQLString},
         name: {type: GraphQLString},
         age:  {type: GraphQLInt},
         books: {
@@ -79,7 +79,7 @@ const RootQuery = new GraphQLObjectType({
         //**Get a book based on the suplied id */
         book: {
             type: BookType,
-            args: {id: {type: GraphQLID}},
+            args: {id: {type: GraphQLString}},
             resolve(parent, args) {
                 //Code to fetch data from the database.
                 return _.find(books, {id: args.id});
@@ -99,7 +99,7 @@ const RootQuery = new GraphQLObjectType({
         //***Get an author based on the suplied id */
         author: {
             type: AuthorType,
-            args: {id: {type: GraphQLID}},
+            args: {id: {type: GraphQLString}},
             resolve(parent, args) {
                 //Code to fetch data from the database.
                 return _.find(authors, {id: args.id});

@@ -14,25 +14,28 @@ const {
 
     } = graphql;
 
+
+
+
+/************************************************************************************************************* */
 //test data - this is done this way only for example purposes. In a real application the data should be persisted in 
 // real database system like mySql or mongoDb. Also please keep in mind that everytime the node server is restarted the
 // data you saved before is no longer present, only the hardcoded data remains.
-
 const uniqid =require('uniqid') //Create unique ids for user. 
 
 let books = [
-    {name: 'Singularidade', genre: 'scfy', id: '1', authorId: '1'},
-    {name: 'Player', genre: 'Romance', id: '2', authorId: '2'},
-    {name: 'Ready player one', genre: 'scfy', id: '3', authorId: '3'},
+    {name: 'Cosmos', genre: 'Cosmology', id: '1', authorId: '1'},
+    {name: 'Billions and Billions', genre: 'Cosmology', id: '2', authorId: '1'},
+    {name: 'Dune', genre: 'scfy', id: '3', authorId: '3'},
     {name: 'love poems', genre: 'romance', id: '4', authorId: '2'},
-    {name: 'Earth2.0', genre: 'scfy', id: '5', authorId: '2'},
+    {name: 'Earth 2.0', genre: 'scfy', id: '5', authorId: '2'},
     {name: 'zero sum game', genre: 'scfy', id: '6', authorId: '2'}
 ];
 
 let authors = [
-    {name: 'some author', age: '36', id: '1'},
-    {name: 'author 2', age: '40', id: '2'},
-    {name: 'aurhor 3', age: '40', id: '3'}
+    {name: 'Carl Sagan', age: '56', id: '1'},
+    {name: 'Some Author', age: '40', id: '2'},
+    {name: 'Frank Herbert', age: '66', id: '3'}
 ];
 /******************************************************************************************************* */
 

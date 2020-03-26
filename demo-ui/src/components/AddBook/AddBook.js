@@ -5,7 +5,7 @@ import {getAuthorsQuery, addBookMutation, getBooksQuery} from '../Queries/Querie
 
 export default function AddBook() {
     const {loading, error, data} = useQuery(getAuthorsQuery);
-    const [addBook, {result}] = useMutation(addBookMutation)
+    const [addBook] = useMutation(addBookMutation)
 
     const [name, setName] =useState()
     const [genre, setGenre] = useState()
